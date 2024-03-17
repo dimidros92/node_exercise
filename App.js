@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const { batchInsertFromFile } = require("./services/FeedDb");
 const Message = require("./models/Message");
 const User = require("./models/User");
+const { byPredicate } = require("./services/UserService");
 const app = express();
 
 app.use(
@@ -34,6 +35,9 @@ app.use((req, res, next) => {
   next(); // Go to next middleware
 });
 
+app.get("/users", async (req, res) => {
+  res.status(200).json(await byPredicate(req.query));
+});
 // Feed file to db
 app.post("/feedDB", async (req, res) => {
   await batchInsertFromFile();
