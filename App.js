@@ -2,6 +2,9 @@
 const express = require("express");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
+const { batchInsertFromFile } = require("./services/FeedDb");
+const Message = require("./models/Message");
+const User = require("./models/User");
 const app = express();
 
 app.use(
@@ -31,6 +34,12 @@ app.use((req, res, next) => {
   next(); // Go to next middleware
 });
 
+// Feed file to db
+app.post("/feedDB", async (req, res) => {
+  await batchInsertFromFile();
+  res.status(200).send();
+});
+
 app.use((req, res, next) => {
   const error = new Error("No route was found for this request!");
   error.status = 404;
@@ -45,5 +54,4 @@ app.use((error, req, res, next) => {
     },
   });
 });
-
 module.exports = app;
