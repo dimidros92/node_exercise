@@ -2,10 +2,8 @@
 const express = require("express");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
-const { batchInsertFromFile } = require("./services/FeedDb");
-const Message = require("./models/Message");
-const User = require("./models/User");
-const { byPredicate } = require("./services/UserService");
+const feedDbRoutes = require("./routes/feedDbRoutes");
+const userRoutes = require("./routes/userRoutes");
 const app = express();
 
 app.use(
@@ -35,14 +33,11 @@ app.use((req, res, next) => {
   next(); // Go to next middleware
 });
 
-app.get("/users", async (req, res) => {
-  res.status(200).json(await byPredicate(req.query));
-});
 // Feed file to db
-app.post("/feedDB", async (req, res) => {
-  await batchInsertFromFile();
-  res.status(200).send();
-});
+app.use("/feedDB", feedDbRoutes);
+
+// users routes
+app.use("/users", userRoutes);
 
 app.use((req, res, next) => {
   const error = new Error("No route was found for this request!");
