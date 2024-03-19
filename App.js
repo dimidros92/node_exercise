@@ -3,6 +3,7 @@ const express = require("express");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const feedDbRoutes = require("./routes/feedDbRoutes");
+const messageRoutes = require("./routes/messageRoutes");
 const userRoutes = require("./routes/userRoutes");
 const app = express();
 
@@ -38,6 +39,9 @@ app.use("/feedDB", feedDbRoutes);
 
 // users routes
 app.use("/users", userRoutes);
+
+// messages routes
+app.use("/messages", messageRoutes);
 
 app.use((req, res, next) => {
   const error = new Error("No route was found for this request!");
