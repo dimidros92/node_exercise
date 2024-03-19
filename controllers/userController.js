@@ -56,7 +56,7 @@ function conversedWith(userId) {
               u.birthday,
               u.gender,
               u.username,
-              MAX(latest_interaction) AS latest_interaction
+              MAX(latest_interaction) AS "latestInteraction"
        FROM users u
                 JOIN (SELECT sender              AS user_id,
                              MAX(timestamp_sent) AS latest_interaction
