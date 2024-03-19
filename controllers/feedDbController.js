@@ -36,7 +36,8 @@ async function insertMessages() {
 }
 exports.feedDB = async (req, res) => {
   try {
-    await Promise.all([insertUsers, insertMessages]);
+    await insertUsers();
+    await insertMessages();
     res.status(200).send();
   } catch (error) {
     res.status(500).send();
