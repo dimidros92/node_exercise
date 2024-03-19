@@ -1,5 +1,6 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const sequelize = require("../db_config");
+const User = require("./User");
 
 const Message = sequelize.define(
   "Message",
@@ -29,10 +30,10 @@ const Message = sequelize.define(
     timestampSent: {
       type: DataTypes.DATE,
       allowNull: false,
+      field: "timestamp_sent",
       defaultValue: Sequelize.NOW,
     },
   },
-  { timestamps: false },
+  { tableName: "messages", timestamps: false },
 );
-
 module.exports = Message;
