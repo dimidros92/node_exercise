@@ -35,13 +35,13 @@ app.use((req, res, next) => {
 });
 
 // Feed file to db
-app.use("/feedDB", feedDbRoutes);
+app.use("/api/feedDB", feedDbRoutes);
 
 // users routes
-app.use("/users", userRoutes);
+app.use("/api/users", userRoutes);
 
 // messages routes
-app.use("/messages", messageRoutes);
+app.use("/api/messages", messageRoutes);
 
 app.use((req, res, next) => {
   const error = new Error("No route was found for this request!");
