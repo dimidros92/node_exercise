@@ -1,5 +1,4 @@
 const sequelize = require("../db_config");
-const Message = require("../models/Message");
 const User = require("../models/User");
 const { Op, QueryTypes } = require("sequelize");
 
@@ -38,7 +37,7 @@ function byPredicate(predicate) {
 
   if (predicate.username) {
     where.username = {
-      [Sequelize.Op.iLike]: "%" + predicate.username + "%",
+      [Op.iLike]: "%" + predicate.username + "%",
     };
   }
   return User.findAll({ where });
