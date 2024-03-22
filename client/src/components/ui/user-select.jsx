@@ -14,7 +14,7 @@ export default function UserSelect({ label, users, selected }) {
   };
 
   return (
-    <Box sx={{ minWidth: 220 }}>
+    <Box sx={{ minWidth: 300 }}>
       <FormControl fullWidth>
         <InputLabel id="select-label">{label}</InputLabel>
         <Select

@@ -9,3 +9,13 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  max-width: 640px;
+}

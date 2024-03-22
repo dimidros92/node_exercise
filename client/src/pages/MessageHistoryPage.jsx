@@ -21,10 +21,12 @@ export const MessageHistoryPage = () => {
   }, [users, dispatch]);
   return (
     <div className="page">
-      <UsersForm selected={setUsers} users={usersSlice.users} />
-      {messagesSlice.messages.length > 0 && users.length > 0 && (
-        <MessageHistory users={users} messages={messagesSlice.messages} />
-      )}
+      <div className="form">
+        <UsersForm selected={setUsers} users={usersSlice.users} />
+        {messagesSlice.messages.length > 0 && users.length > 0 && (
+          <MessageHistory users={users} messages={messagesSlice.messages} />
+        )}
+      </div>
     </div>
   );
 };

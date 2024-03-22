@@ -1,5 +1,16 @@
 .card {
+  width: 100%;
+}
+
+.card-content {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
+}
+
+.selects {
+  display: flex;
+  flex-wrap: wrap;
+  place-content: center;
+  gap: 5px;
 }
