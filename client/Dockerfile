@@ -1,7 +1,7 @@
 FROM node:20.5-slim
 
-#Create app directory
-WORKDIR /usr/src/server
+# Create app directory
+WORKDIR /usr/src/client
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
@@ -10,13 +10,10 @@ COPY package*.json ./
 
 RUN npm install
 
-# Install nodemon globally
-RUN npm install -g nodemon
-
 # Bundle app source
-COPY ./server .
+COPY . .
 
-EXPOSE 3000
+EXPOSE 4000
 
 # Start your Node.js app
-CMD [ "npm", "start" ]
+CMD ["npm", "start"]

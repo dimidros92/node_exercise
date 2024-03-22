@@ -21,8 +21,24 @@ services:
     depends_on:
       - postgres_db
     volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
+      - .:/usr/src/server
+      - /usr/src/server/node_modules
+
+  client:
+    container_name: node_assignment_client
+    restart: always
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    depends_on:
+      - api
+    volumes:
+      - ./client:/usr/src/client
+      - /usr/src/client/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
 
 volumes:
   data: {}
