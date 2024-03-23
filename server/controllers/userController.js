@@ -1,4 +1,5 @@
 const sequelize = require("../db_config");
+const { UserDto } = require("../dtos/UserDto");
 const User = require("../models/User");
 const { Op, QueryTypes } = require("sequelize");
 
@@ -50,11 +51,8 @@ function byPredicate(predicate) {
 function conversedWith(userId) {
   return sequelize.query(
     `SELECT u.id,
-              u.first_name,
-              u.last_name,
-              u.birthday,
-              u.gender,
-              u.username,
+              u.first_name as "firstName",
+              u.last_name as "lastName",
               MAX(latest_interaction) AS "latestInteraction"
        FROM users u
                 JOIN (SELECT sender              AS user_id,
@@ -71,9 +69,9 @@ function conversedWith(userId) {
        GROUP BY u.id
        ORDER BY MAX(latest_interaction) DESC`,
     {
-      replacements: { userId: userId },
+      replacements: { userId },
       type: QueryTypes.SELECT,
-      model: User,
+      model: UserDto,
       mapToModel: true,
     },
   );
@@ -86,6 +84,5 @@ exports.byPredicate = async (req, res) => {
 
 exports.conversedWith = async (req, res) => {
   const users = await conversedWith(req.params.userId);
-  console.log(users);
   res.status(200).json(users);
 };
