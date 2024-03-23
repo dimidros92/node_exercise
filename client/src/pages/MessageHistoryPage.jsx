@@ -5,6 +5,7 @@ import { fetchUsers } from "../state/users/userSlice";
 import UsersForm from "../components/ui/user-form/users-form";
 import { fetchMessages } from "../state/messages/messageSlice";
 import MessageHistory from "../components/ui/message-history/message-history";
+import { CircularProgress } from "@mui/material";
 export const MessageHistoryPage = () => {
   const dispatch = useDispatch();
   const usersSlice = useSelector((state) => state.users);
@@ -23,6 +24,8 @@ export const MessageHistoryPage = () => {
     <div className="page">
       <div className="form">
         <UsersForm selected={setUsers} users={usersSlice.users} />
+
+        {messagesSlice.loading && <CircularProgress />}
         {messagesSlice.messages.length > 0 && users.length > 0 && (
           <MessageHistory users={users} messages={messagesSlice.messages} />
         )}

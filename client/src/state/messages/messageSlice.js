@@ -13,6 +13,7 @@ const messageSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchMessages.pending, (state) => {
       state.loading = true;
+      state.messages = [];
     });
     builder.addCase(fetchMessages.fulfilled, (state, action) => {
       state.loading = false;
