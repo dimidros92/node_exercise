@@ -1,5 +1,5 @@
 const sequelize = require("../db_config");
-const { UserDto } = require("../dtos/UserDto");
+const UserDto = require("../dtos/UserDto");
 const User = require("../models/User");
 const { Op, QueryTypes } = require("sequelize");
 
@@ -71,14 +71,12 @@ function conversedWith(userId) {
     {
       replacements: { userId },
       type: QueryTypes.SELECT,
-      model: UserDto,
-      mapToModel: true,
     },
   );
 }
 
 exports.byPredicate = async (req, res) => {
-  const users = await byPredicate(req.query);
+  const users = (await byPredicate(req.query)).map((user) => new UserDto(user));
   res.status(200).json(users);
 };
 

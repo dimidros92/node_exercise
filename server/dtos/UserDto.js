@@ -1,4 +1,7 @@
 class UserDto {
+  id;
+  firstName;
+  lastName;
   /**
    * constructor from User model
    *  @param {object} predicate
@@ -15,3 +18,5 @@ class UserDto {
     this.lastName = user.lastName;
   }
 }
+
+module.exports = UserDto;
